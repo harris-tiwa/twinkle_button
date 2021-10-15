@@ -6,7 +6,6 @@ import 'dart:async';
 ///
 /// A package provides a button plug-in that can flash.
 ///
-
 import 'package:flutter/material.dart';
 import 'package:twinkle_button/shimmer.dart';
 
@@ -21,10 +20,10 @@ class TwinkleButton extends StatefulWidget {
   final GestureTapCallback onclickButtonFunction;
 
   const TwinkleButton({
-    Key key,
-    @required this.buttonTitle,
-    @required this.buttonColor,
-    @required this.onclickButtonFunction,
+    Key? key,
+    required this.buttonTitle,
+    required this.buttonColor,
+    required this.onclickButtonFunction,
     this.highlightColor = Colors.white,
     this.buttonHeight = 50.0,
     this.buttonWidth = 280.0,
@@ -39,12 +38,12 @@ class TwinkleButton extends StatefulWidget {
 class _TwinkleButtonState extends State<TwinkleButton>
     with SingleTickerProviderStateMixin {
 
-  double _scale;
-  AnimationController _controller;
-  Timer _timer;
-  int _twinkleCount;
+  late double _scale;
+  late AnimationController _controller;
+  Timer? _timer;
+  int? _twinkleCount;
 
-  void _loopAnimation(int twinkleCount) {
+  void _loopAnimation(int? twinkleCount) {
     if(twinkleCount == 1) {
       setState(() {
         _timer = Timer(Duration(seconds: widget.durationTime), _twinkleForward,);
@@ -76,7 +75,7 @@ class _TwinkleButtonState extends State<TwinkleButton>
             _twinkleCount = 0;
           }
           else {
-            _twinkleCount++;
+            _twinkleCount = _twinkleCount! + 1;
           }
           _loopAnimation(_twinkleCount);
         }
@@ -100,7 +99,7 @@ class _TwinkleButtonState extends State<TwinkleButton>
     _scale = 1 + _controller.value;
 
     return GestureDetector(
-      onTap: widget.onclickButtonFunction ?? () {},
+      onTap: widget.onclickButtonFunction,
       child: Transform.scale(
         scale: _scale,
         child: _twinkleButton,
@@ -115,21 +114,26 @@ class _TwinkleButtonState extends State<TwinkleButton>
           Container(
             width: widget.buttonWidth,
             height: widget.buttonHeight,
-            child: RaisedButton(
+            child: ElevatedButton(
               onPressed: () async {
                 return null;
               },
-              padding: EdgeInsets.only(
-                top: 10.0,
-                bottom: 10.0,
-                left: 15.0,
-                right: 15.0,
+              style: ElevatedButton.styleFrom(
+                textStyle: TextStyle(
+                  color: Colors.white
+                ),
+                padding: EdgeInsets.only(
+                  top: 10.0,
+                  bottom: 10.0,
+                  left: 15.0,
+                  right: 15.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                primary: widget.buttonColor,
               ),
-              textColor: Colors.white,
-              color: widget.buttonColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
+              child: null,
             ),
           ),
           Container(
