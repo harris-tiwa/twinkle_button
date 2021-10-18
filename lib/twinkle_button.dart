@@ -26,7 +26,7 @@ class TwinkleButton extends StatefulWidget {
     required this.onclickButtonFunction,
     this.highlightColor = Colors.white,
     this.buttonHeight = 50.0,
-    this.buttonWidth = 280.0,
+    this.buttonWidth = 100.0,
     this.durationTime = 3,
     this.twinkleTime = 300,
   }) : super(key: key);
@@ -108,7 +108,8 @@ class _TwinkleButtonState extends State<TwinkleButton>
   }
 
   Widget get _twinkleButton => Container(
-    child: Center(
+    child: Align(
+      alignment: Alignment.bottomRight,
       child: Stack(
         children: <Widget>[
           Container(
@@ -129,7 +130,7 @@ class _TwinkleButtonState extends State<TwinkleButton>
                   right: 15.0,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 primary: widget.buttonColor,
               ),
@@ -140,7 +141,7 @@ class _TwinkleButtonState extends State<TwinkleButton>
             width: widget.buttonWidth,
             height: widget.buttonHeight,
             decoration: new BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
             ),
             child: Opacity(
               opacity: 0.6,
@@ -152,7 +153,7 @@ class _TwinkleButtonState extends State<TwinkleButton>
                   height: widget.buttonHeight,
                   decoration: new BoxDecoration(
                     color: widget.buttonColor,
-                    borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
                 ),
               ),
@@ -162,7 +163,7 @@ class _TwinkleButtonState extends State<TwinkleButton>
             width: widget.buttonWidth,
             height: widget.buttonHeight,
             decoration: new BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
             ),
             child: Center(
               child: widget.buttonTitle,
